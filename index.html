@@ -23,17 +23,11 @@ rel="stylesheet">
     font-family:'Poppins',sans-serif;
 }
 
-html{
-    scroll-behavior:smooth;
-}
-
 body{
 
     min-height:100vh;
 
     overflow-x:hidden;
-
-    -webkit-tap-highlight-color:transparent;
 
     background:
     linear-gradient(
@@ -866,8 +860,10 @@ id="birthdayPage">
 
 <audio
 id="bgMusic"
+autoplay
 loop
-preload="auto">
+muted
+playsinline>
 
     <source
     src="song.mp3"
@@ -886,7 +882,8 @@ new Date("2022-11-09T00:00:00");
 
 function updateLoveTimer(){
 
-    const now = new Date();
+    const now =
+    new Date();
 
     const diff =
     now - loveDate;
@@ -1088,35 +1085,45 @@ function createBalloon(){
 
 setInterval(createBalloon,500);
 
-/* BETTER MOBILE AUDIO FIX */
+/* FORCE MOBILE AUTOPLAY */
 
 const music =
 document.getElementById("bgMusic");
 
-function startMusic(){
+window.addEventListener("load",()=>{
 
+    const playPromise =
     music.play();
 
-    document.removeEventListener(
-    "touchstart",
-    startMusic
-    );
+    if(playPromise !== undefined){
 
-    document.removeEventListener(
-    "click",
-    startMusic
-    );
+        playPromise.then(()=>{
+
+            music.muted = false;
+
+        }).catch(()=>{
+
+            document.body.addEventListener(
+            "touchstart",
+            enableSound,
+            {once:true}
+            );
+
+            document.body.addEventListener(
+            "click",
+            enableSound,
+            {once:true}
+            );
+        });
+    }
+});
+
+function enableSound(){
+
+    music.muted = false;
+
+    music.play();
 }
-
-document.addEventListener(
-"touchstart",
-startMusic
-);
-
-document.addEventListener(
-"click",
-startMusic
-);
 
 </script>
 

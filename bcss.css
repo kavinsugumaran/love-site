@@ -1,0 +1,68 @@
+/* ADD THIS IN CSS */
+
+.love-counter{
+    margin-top:20px;
+    font-size:1.2rem;
+    font-weight:600;
+    color:white;
+    text-shadow:0 0 10px #ff4d6d;
+}
+
+.typing-text{
+    margin-top:15px;
+    font-size:1.1rem;
+    min-height:40px;
+    color:#ffd6de;
+}
+
+.letter-box{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.8);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    opacity:0;
+    pointer-events:none;
+    transition:0.4s;
+    z-index:999;
+}
+
+.letter-box.active{
+    opacity:1;
+    pointer-events:auto;
+}
+
+.letter-content{
+    width:90%;
+    max-width:500px;
+    background:white;
+    color:#111;
+    padding:35px;
+    border-radius:25px;
+    text-align:center;
+    animation: popupAnim 0.5s ease;
+    box-shadow:0 10px 40px rgba(255,77,109,0.4);
+}
+
+.letter-content h2{
+    margin-bottom:20px;
+    color:#ff4d6d;
+}
+
+.letter-content p{
+    color:#333;
+    line-height:1.9;
+}
+
+@keyframes popupAnim{
+    from{
+        transform:scale(0.7);
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
